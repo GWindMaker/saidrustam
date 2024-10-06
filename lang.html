@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tortlar Baku VIP - Язык переключения</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="script.js" defer></script>
+    <style>
+        /* Стили для переключателя языка */
+        .language-switcher {
+            position: relative;
+            display: inline-block;
+            margin-left: auto;
+            margin-right: 20px;
+        }
+
+        .language-btn {
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .language-btn i {
+            margin-right: 8px;
+        }
+
+        .language-dropdown {
+            display: none; /* Скрыть выпадающий список по умолчанию */
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 100px;
+            border-radius: 5px;
+        }
+
+        .language-dropdown li {
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .language-dropdown li:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Отображение выпадающего списка при клике */
+        .language-dropdown.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Tortlar Baku VIP</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i>Əsas səhifə</a></li>
+                <li><a href="gallery.html"><i class="fas fa-images"></i>Qalereya</a></li>
+                <li><a href="menu.html"><i class="fas fa-utensils"></i>Menyu</a></li>
+                <li><a href="order.html"><i class="fas fa-shopping-cart"></i>Sifariş</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i>Əlaqə</a></li>
+            </ul>
+            <!-- Переключение языка -->
+            <div class="language-switcher">
+                <button id="language-button" class="language-btn"><i class="fas fa-globe"></i> AZ</button>
+                <ul class="language-dropdown" id="language-dropdown">
+                    <li data-lang="AZ">AZ</li>
+                    <li data-lang="RU">RU</li>
+                    <li data-lang="EN">EN</li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Содержание страницы</h2>
+        <!-- Здесь основной контент страницы -->
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Tortlar Baku VIP</p>
+    </footer>
+
+    <script>
+        // JavaScript для переключения языков
+        document.addEventListener('DOMContentLoaded', () => {
+            const languageButton = document.getElementById('language-button');
+            const languageDropdown = document.getElementById('language-dropdown');
+
+            // Обработчик для открытия/закрытия выпадающего списка
+            languageButton.addEventListener('click', () => {
+                languageDropdown.classList.toggle('active');
+            });
+
+            // Обработчик для выбора языка из выпадающего списка
+            languageDropdown.querySelectorAll('li').forEach(item => {
+                item.addEventListener('click', () => {
+                    const selectedLang = item.getAttribute('data-lang');
+                    languageButton.innerHTML = `<i class="fas fa-globe"></i> ${selectedLang}`;
+                    languageDropdown.classList.remove('active');
+                    // Здесь можно добавить логику для изменения языка сайта
+                    console.log(`Язык выбран: ${selectedLang}`);
+                });
+            });
+
+            // Закрытие выпадающего списка при клике вне его
+            document.addEventListener('click', (e) => {
+                if (!languageButton.contains(e.target) && !languageDropdown.contains(e.target)) {
+                    languageDropdown.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
